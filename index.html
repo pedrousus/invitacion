@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación Bodas de Plata</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Tangerine:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Libre Baskerville', serif;
+            background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .phone-container {
+            width: 375px;
+            height: 812px;
+            background: #fff;
+            border-radius: 40px;
+            padding: 8px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            border-radius: 32px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 30px;
+            background: #000;
+            border-radius: 0 0 20px 20px;
+            z-index: 100;
+        }
+
+        .invitation-content {
+            height: 100%;
+            overflow-y: auto;
+            padding: 60px 0 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Contenedores para imágenes florales */
+        .floral-image {
+            position: absolute;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        /* Imagen floral superior */
+        .floral-top-image {
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 200px;
+            background: url('s/1.jpg') no-repeat center top;
+            background-size: cover;
+            opacity: 0.8;
+            mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+        }
+        
+        /* Imagen floral inferior */
+        .floral-bottom-image {
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 200px;
+            background: url('s/1.jpg') no-repeat center bottom;
+            background-size: cover;
+            opacity: 0.8;
+            mask-image: linear-gradient(to top, black 50%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to top, black 50%, transparent 100%);
+        }
+        
+        /* Rosas en las esquinas */
+        .corner-floral-image {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            z-index: 1;
+            pointer-events: none;
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2));
+        }
+        
+        .top-left-image {
+            top: 20px;
+            left: 20px;
+            background: url('s/1.jpg') no-repeat center center;
+            background-size: cover;
+            opacity: 0.85;
+            clip-path: polygon(0 0, 100% 0, 0 100%);
+        }
+        
+        .bottom-right-image {
+            bottom: 20px;
+            right: 20px;
+            background: url('s/1.jpg') no-repeat center center;
+            background-size: cover;
+            opacity: 0.85;
+            clip-path: polygon(100% 0, 100% 100%, 0 100%);
+        }
+
+        /* Marco floral lateral completo para los nombres */
+        .couple-highlight {
+            position: relative;
+            margin: 40px 0;
+            padding: 40px 0;
+            text-align: center;
+            z-index: 3;
+            display: flex;
+            justify-content: center;
+            background: url('s/3.jpg') no-repeat center center;
+            background-size: cover;
+            min-height: 200px;
+        }
+        
+        .floral-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            z-index: -1;
+        }
+        
+        .couple-names-container {
+            position: relative;
+            z-index: 2;
+            padding: 0 20px;
+        }
+        
+        .couple-names {
+            font-family: 'Tangerine', cursive;
+            font-size: 64px;
+            color: #2c3e50;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin: 5px 0;
+            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.8);
+            line-height: 1.1;
+        }
+        
+        .and-symbol {
+            font-family: 'Dancing Script', cursive;
+            font-size: 56px;
+            color: #be7c93;
+            margin: -10px 0 -5px;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+            animation: pulse 2s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.1); opacity: 1; }
+        }
+
+        .silver-ornament {
+            text-align: center;
+            margin: 10px 0;
+            font-size: 46px;
+            color: #c0c0c0;
+            animation: sparkle 3s infinite alternate;
+            position: relative;
+            z-index: 3;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        @keyframes sparkle {
+            0% { opacity: 0.7; transform: scale(0.95); text-shadow: 0 0 5px rgba(192,192,192,0.3); }
+            100% { opacity: 1; transform: scale(1); text-shadow: 0 0 15px rgba(192,192,192,0.7); }
+        }
+
+        .anniversary-text {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-weight: normal;
+            position: relative;
+            z-index: 3;
+            padding: 0 20px;
+        }
+
+        .main-title {
+            text-align: center;
+            font-family: 'Dancing Script', cursive;
+            font-size: 36px;
+            color: #be7c93;
+            margin: 15px 0 25px;
+            line-height: 1.3;
+            position: relative;
+            z-index: 3;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+            padding: 0 20px;
+        }
+
+        .blessing-text {
+            text-align: center;
+            font-size: 15px;
+            color: #34495e;
+            margin: 20px 0;
+            line-height: 1.6;
+            font-style: italic;
+            position: relative;
+            z-index: 3;
+            font-family: 'Libre Baskerville', serif;
+            padding: 0 20px;
+        }
+
+        .content-section {
+            position: relative;
+            z-index: 3;
+            margin: 25px 0;
+            padding: 0 20px;
+        }
+
+        .detail-item {
+            text-align: center;
+            margin: 15px 0;
+            position: relative;
+            z-index: 3;
+        }
+
+        .detail-label {
+            font-family: 'Playfair Display', serif;
+            font-size: 13px;
+            color: #be7c93;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .detail-value {
+            font-size: 18px;
+            color: #2c3e50;
+            font-weight: normal;
+        }
+
+        .event-details {
+            padding: 10px 0;
+            position: relative;
+            z-index: 3;
+        }
+
+        .venue-name {
+            font-family: 'Dancing Script', cursive;
+            font-size: 24px;
+            color: #be7c93;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .venue-address {
+            font-size: 13px;
+            color: #555;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        /* Sección de padres y padrinos */
+        .family-section {
+            position: relative;
+            z-index: 3;
+            margin: 30px 0;
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            color: #be7c93;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 1px;
+            background: #be7c93;
+        }
+        
+        .family-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        .family-group {
+            background: rgba(249, 247, 247, 0.8);
+            border-radius: 12px;
+            padding: 15px;
+            min-width: 140px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            border: 1px solid rgba(190, 124, 147, 0.1);
+            backdrop-filter: blur(2px);
+        }
+        
+        .family-role {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 12px;
+            color: #be7c93;
+            margin-bottom: 8px;
+            font-style: italic;
+        }
+        
+        .family-names {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            color: #2c3e50;
+            line-height: 1.4;
+        }
+
+        .dress-code-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            color: #be7c93;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .dress-code-text {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.4;
+        }
+
+        .dress-code {
+            padding: 15px 0;
+            text-align: center;
+            position: relative;
+            z-index: 3;
+            padding: 0 20px;
+        }
+
+        .confirmation-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .confirmation-text {
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .final-message {
+            text-align: center;
+            font-size: 14px;
+            color: #34495e;
+            margin: 20px 0;
+            line-height: 1.6;
+            font-style: italic;
+            position: relative;
+            z-index: 3;
+            font-family: 'Libre Baskerville', serif;
+            padding: 0 20px;
+        }
+
+        .hosts {
+            text-align: center;
+            font-family: 'Dancing Script', cursive;
+            font-size: 22px;
+            color: #be7c93;
+            margin-top: 30px;
+            position: relative;
+            z-index: 3;
+            font-weight: bold;
+            padding: 0 20px;
+        }
+
+        .confirmation {
+            background: #f9f7f7;
+            color: #2c3e50;
+            border-radius: 15px;
+            padding: 20px 15px;
+            text-align: center;
+            border: 1px solid rgba(190, 124, 147, 0.2);
+            margin: 20px 20px;
+            position: relative;
+            z-index: 3;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(190,124,147,0.3) 50%, transparent 100%);
+            margin: 25px 20px;
+            position: relative;
+            z-index: 3;
+        }
+
+        /* Pétalos flotantes */
+        .petal {
+            position: absolute;
+            background: rgba(211, 47, 47, 0.6);
+            border-radius: 50% 30% 50% 30%;
+            z-index: 1;
+            animation: float linear infinite;
+            filter: blur(0.8px);
+        }
+
+        @keyframes float {
+            0% { 
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% { 
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-container">
+        <div class="notch"></div>
+        <div class="phone-screen">
+            <!-- Imagen floral superior -->
+            <div class="floral-image floral-top-image"></div>
+            
+            <!-- Imagen floral inferior -->
+            <div class="floral-image floral-bottom-image"></div>
+            
+            <!-- Rosas en la esquina superior izquierda -->
+            <div class="corner-floral-image top-left-image"></div>
+            
+            <!-- Rosas en la esquina inferior derecha -->
+            <div class="corner-floral-image bottom-right-image"></div>
+            
+            <!-- Pétalos flotantes -->
+            <div id="petals-container"></div>
+            
+            <div class="invitation-content">
+                <div class="silver-ornament">25</div>
+                
+                <div class="anniversary-text">Bodas de Plata</div>
+                
+                <div class="main-title">Celebrando Nuestro Amor</div>
+                
+                <!-- Marco floral lateral completo para los nombres -->
+                <div class="couple-highlight">
+                    <div class="floral-overlay"></div>
+                    <div class="couple-names-container">
+                        <div class="couple-names">María</div>
+                        <div class="and-symbol">&</div>
+                        <div class="couple-names">José</div>
+                    </div>
+                </div>
+                
+                <div class="blessing-text">
+                    "Con la bendición de Dios y la presencia de nuestra familia<br>
+                    celebramos 25 años de amor"
+                </div>
+                
+                <div class="divider"></div>
+                
+                <div class="event-details content-section">
+                    <div class="detail-item">
+                        <div class="detail-label">Fecha</div>
+                        <div class="detail-value">Sábado 15 de Febrero, 2025</div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="detail-label">Hora</div>
+                        <div class="detail-value">7:00 PM</div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="detail-label">Celebración</div>
+                        <div class="venue-name">Salón Los Arcos</div>
+                        <div class="venue-address">
+                            Calle Independencia 203, Col. Centro<br>
+                            Aguascalientes, Ags.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="divider"></div>
+                
+                <!-- Sección de padres -->
+                <div class="family-section">
+                    <div class="section-title">Con la bendición de nuestros padres</div>
+                    <div class="family-container">
+                        <div class="family-group">
+                            <div class="family-role">Padres de la Novia</div>
+                            <div class="family-names">Carlos y Luisa Rodríguez</div>
+                        </div>
+                        <div class="family-group">
+                            <div class="family-role">Padres del Novio</div>
+                            <div class="family-names">Roberto y Sofía López</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sección de padrinos -->
+                <div class="family-section">
+                    <div class="section-title">Acompañados por nuestros padrinos</div>
+                    <div class="family-container">
+                        <div class="family-group">
+                            <div class="family-role">Padrinos de Ceremonia</div>
+                            <div class="family-names">Miguel y Elena Martínez</div>
+                        </div>
+                        <div class="family-group">
+                            <div class="family-role">Padrinos de Banquete</div>
+                            <div class="family-names">Javier y Carmen Sánchez</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="divider"></div>
+                
+                <div class="dress-code">
+                    <div class="dress-code-title">Código de Vestimenta</div>
+                    <div class="dress-code-text">
+                        Formal<br>
+                        Se sugiere usar colores plateados o dorados<br>
+                        en honor a nuestras bodas de plata
+                    </div>
+                </div>
+                
+                <div class="confirmation">
+                    <div class="confirmation-title">Confirmación de Asistencia</div>
+                    <div class="confirmation-text">
+                        Favor de confirmar su asistencia<br>
+                        antes del 1 de febrero<br>
+                        al teléfono: 449-123-4567
+                    </div>
+                </div>
+                
+                <div class="final-message">
+                    "Gracias por ser parte de nuestro gran día<br>
+                    y por acompañarnos en esta hermosa celebración"
+                </div>
+                
+                <div class="hosts">
+                    Con amor,<br>
+                    La Familia Rodríguez
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Generador de pétalos flotantes mejorado
+        document.addEventListener('DOMContentLoaded', function() {
+            const petalsContainer = document.getElementById('petals-container');
+            const petalCount = 30;
+            
+            for (let i = 0; i < petalCount; i++) {
+                const petal = document.createElement('div');
+                petal.classList.add('petal');
+                
+                // Tamaño aleatorio
+                const size = Math.random() * 15 + 8;
+                petal.style.width = `${size}px`;
+                petal.style.height = `${size}px`;
+                
+                // Posición inicial aleatoria
+                const startX = Math.random() * window.innerWidth;
+                petal.style.left = `${startX}px`;
+                petal.style.top = `-${size}px`;
+                
+                // Color aleatorio (tonos de rojo)
+                const hue = 340 + Math.random() * 15;
+                const opacity = 0.4 + Math.random() * 0.4;
+                petal.style.backgroundColor = `hsla(${hue}, 80%, 60%, ${opacity})`;
+                
+                // Duración de animación
+                const duration = Math.random() * 15 + 15;
+                petal.style.animationDuration = `${duration}s`;
+                
+                // Retraso de inicio
+                const delay = Math.random() * 10;
+                petal.style.animationDelay = `${delay}s`;
+                
+                // Forma aleatoria
+                petal.style.borderRadius = `${Math.random() * 50 + 30}% ${Math.random() * 50 + 30}% ${Math.random() * 50 + 30}% ${Math.random() * 50 + 30}%`;
+                
+                // Rotación inicial
+                const rotation = Math.random() * 360;
+                petal.style.transform = `rotate(${rotation}deg)`;
+                
+                // Tiempo de animación variable
+                petal.style.animationTimingFunction = `cubic-bezier(${Math.random()}, ${Math.random()}, ${Math.random()}, ${Math.random()})`;
+                
+                petalsContainer.appendChild(petal);
+            }
+        });
+    </script>
+</body>
+</html>
