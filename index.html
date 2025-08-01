@@ -491,34 +491,31 @@
             font-weight: 500;
         }
 
-        .confirmation-icons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 25px;
-        }
-
-        .confirmation-icons a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: clamp(55px, 10vw, 60px);
-            height: clamp(55px, 10vw, 60px);
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.8);
-            color: #d4af37;
-            font-size: clamp(24px, 4vw, 28px);
-            text-decoration: none;
-            transition: all 0.4s ease;
-            border: 2px solid #d4af37;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        .confirmation-icons a:hover {
-            background: #d4af37;
+        .confirmation-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 30px;
+            background-color: #25D366;
             color: white;
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: clamp(18px, 3vw, 20px);
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: none;
+            cursor: pointer;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        .confirmation-button:hover {
+            background-color: #128C7E;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .confirmation-button i {
+            margin-right: 10px;
         }
 
         /* Contenedor final */
@@ -676,6 +673,10 @@
                 bottom: 20px;
                 right: 20px;
             }
+
+            .confirmation-button {
+                padding: 12px 25px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -727,6 +728,11 @@
                 font-size: 18px;
                 bottom: 15px;
                 right: 15px;
+            }
+
+            .confirmation-button {
+                padding: 10px 20px;
+                font-size: 16px;
             }
         }
     </style>
@@ -863,11 +869,19 @@
             <iframe width="560" height="315" src="https://www.youtube.com/embed/Z-dBvjYM7NU?si=qcGcmmOkrImAWRz-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
         
-        <!-- Contenedor de código de vestimenta -->
         
         
-        <!-- Contenedor de confirmación -->
-        
+        <!-- Contenedor de confirmación por WhatsApp -->
+        <div class="confirmation-container">
+            <div class="confirmation-title">Confirmación de Asistencia</div>
+            <div class="confirmation-text">
+                Por favor confirma tu asistencia antes del 1 de septiembre de 2025<br>
+                Haz clic en el botón para enviarnos un mensaje por WhatsApp
+            </div>
+            <a href="https://wa.me/524498245985?text=¡Confirmo%20mi%20asistencia%20a%20sus%20Bodas%20de%20Plata!%20Nombre(s):%20" class="confirmation-button">
+                <i class="fab fa-whatsapp"></i> Confirmar por WhatsApp
+            </a>
+        </div>
         
         <!-- Contenedor final -->
         <div class="final-container">
